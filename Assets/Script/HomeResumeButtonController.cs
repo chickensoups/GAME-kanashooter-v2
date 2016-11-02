@@ -12,18 +12,7 @@ public class HomeResumeButtonController : MonoBehaviour {
     {
         ResumeButton.gameObject.SetActive(false);
         HomeButton.onClick.AddListener(openMenuPanel);
-    }
-    void Update()
-    {   
-        //to make sure that newly activated buttons work properly
-        if(HomeButton.gameObject.activeInHierarchy)
-        {
-            HomeButton.onClick.AddListener(openMenuPanel);
-        }
-        if(ResumeButton.gameObject.activeInHierarchy)
-        {
-            ResumeButton.onClick.AddListener(closeMenuPanel);
-        }
+        ResumeButton.onClick.AddListener(closeMenuPanel);
     }
     void openMenuPanel()
     {
