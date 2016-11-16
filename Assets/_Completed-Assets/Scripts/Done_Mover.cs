@@ -7,6 +7,11 @@ public class Done_Mover : MonoBehaviour
 
 	void Start ()
 	{
-		GetComponent<Rigidbody>().velocity = transform.forward * speed;
-	}
+		GetComponentsInChildren<Rigidbody>()[0].velocity = transform.forward * speed;
+	    if (GetComponentsInChildren<Rigidbody>().Length > 1)
+	    {
+            GetComponentsInChildren<Rigidbody>()[1].velocity = transform.forward * speed;
+        }
+        
+    }
 }
