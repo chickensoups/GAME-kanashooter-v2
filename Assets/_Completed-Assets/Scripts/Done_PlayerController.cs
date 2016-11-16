@@ -14,16 +14,31 @@ public class Done_PlayerController : MonoBehaviour
 	public Done_Boundary boundary;
 
 	public GameObject shot;
+
 	public Transform shotSpawn;
 	public float fireRate;
 	 
 	private float nextFire;
-	
+
+    private static Done_PlayerController _instance;
+    
+    public static Done_PlayerController instance
+    {
+        get { return _instance; }
+    }
+
+    public GameObject currentTarget, currentBulletType;
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
 	void Update ()
 	{
-		if (Input.GetButton("Fire1") && Time.time > nextFire) 
+		if (currentTarget != null && currentBulletType != null && Time.time > nextFire) 
 		{
-			nextFire = Time.time + fireRate;
+            nextFire = Time.time + fireRate;
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
@@ -31,11 +46,15 @@ public class Done_PlayerController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		GetComponent<Rigidbody>().velocity = movement * speed;
+	    float enemyPositionX = currentTarget.transform.position.x;
+	    if (transform.position.x < enemyPositionX)
+	    {
+	        GetComponent<Rigidbody>().velocity = new Vector3(speed, 0.0f, 0.0f);
+	    }
+	    else
+	    {
+            GetComponent<Rigidbody>().velocity = new Vector3(-speed, 0.0f, 0.0f);
+        }
 		
 		GetComponent<Rigidbody>().position = new Vector3
 		(
