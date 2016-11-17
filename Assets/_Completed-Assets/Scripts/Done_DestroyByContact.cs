@@ -33,14 +33,12 @@ public class Done_DestroyByContact : MonoBehaviour
 			Instantiate(explosion, transform.position, transform.rotation);
 		}
 
-		if (other.tag == "Player")
+		if (other.tag == "Barrier")
 		{
-			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-			gameController.GameOver();
+			Instantiate(playerExplosion, transform.position, transform.rotation);
 		}
 		
 		gameController.AddScore(scoreValue);
-		Destroy (other.gameObject);
 		Destroy (gameObject);
 	}
 }
