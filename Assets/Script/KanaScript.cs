@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEditorInternal;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,9 +16,9 @@ public class KanaScript : MonoBehaviour
 
     void Start()
     {
-        initTable();
         HiraganaTab.GetComponent<Button>();
         KatakanaTab.GetComponent<Button>();
+        initTable();
         HiraganaTab.onClick.AddListener(clickHiraganaButton);
         KatakanaTab.onClick.AddListener(clickKatakanaButton);
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
@@ -32,13 +33,13 @@ public class KanaScript : MonoBehaviour
     {
 
         String character = EventSystem.current.currentSelectedGameObject.name;
-        
         AudioClip audio = Resources.Load<AudioClip>("sound/pronunciation/" + character);
         AudioSource.PlayClipAtPoint(audio, new Vector3(0, 0, 0), 0.5f);
     }
 
     void initTable()
     {
+        HiraganaTab.image.color = Color.cyan;
         for (int i = 0; i < ROMA_CHARS.Length; i++)
         {
             if (ROMA_CHARS[i] != ".")
@@ -64,6 +65,8 @@ public class KanaScript : MonoBehaviour
 
     void clickHiraganaButton()
     {
+        HiraganaTab.image.color = Color.cyan;
+        KatakanaTab.image.color = Color.white;
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
         if (characters.Length != 0)
         {
@@ -79,6 +82,8 @@ public class KanaScript : MonoBehaviour
 
     void clickKatakanaButton()
     {
+        KatakanaTab.image.color = Color.cyan;
+        HiraganaTab.image.color = Color.white;
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
         if (characters.Length != 0)
         {
