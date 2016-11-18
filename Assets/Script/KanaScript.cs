@@ -39,7 +39,7 @@ public class KanaScript : MonoBehaviour
 
     void initTable()
     {
-        HiraganaTab.image.color = Color.cyan;
+        HiraganaTab.image.color = new Color(25,118,210, 1);
         for (int i = 0; i < ROMA_CHARS.Length; i++)
         {
             if (ROMA_CHARS[i] != ".")
@@ -65,7 +65,7 @@ public class KanaScript : MonoBehaviour
 
     void clickHiraganaButton()
     {
-        HiraganaTab.image.color = Color.cyan;
+        HiraganaTab.image.color = new Color(25, 118, 210, 1);
         KatakanaTab.image.color = Color.white;
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
         if (characters.Length != 0)
@@ -82,7 +82,7 @@ public class KanaScript : MonoBehaviour
 
     void clickKatakanaButton()
     {
-        KatakanaTab.image.color = Color.cyan;
+        KatakanaTab.image.color = new Color(25, 118, 210, 1);
         HiraganaTab.image.color = Color.white;
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
         if (characters.Length != 0)

@@ -1,9 +1,10 @@
 ﻿//using System.Collections.Generic;
+//using System.Diagnostics;
 //using System.Linq;
 
 //public class LevelUtil
 //{
-//    public static string[] ENG_CHARS = { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" };
+//    public static string[] ROMA_CHARS = { "a", "i", "u", "e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta", "chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu", "he", "ho", "ma", "mi", "mu", "me", "mo", "ra", "ri", "ru", "re", "ro", "ya", "yu", "yo", "wa", "wo", "n" };
 //    public static string[] HIRA_CHARS = { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "ら", "り", "る", "れ", "ろ", "や", "ゆ", "よ", "わ", "を", "ん" };
 //    public static string[] KATA_CHARS = { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ラ", "リ", "ル", "レ", "ロ", "ヤ", "ユ", "ヨ", "ワ", "ヲ", "ン" };
 
@@ -11,13 +12,17 @@
 
 //    public static void Init()
 //    {
+//        for (int i = 0; i < 9; i++)
+//        {
+//            string name = "Level " + i + "/" + Constants.TOTAL_ROUND;
+//            List<string> answer = new List<string>(new[] { ROMA_CHARS[i * 5], ROMA_CHARS[i * 5 + 1], ROMA_CHARS[i * 5 + 2], ROMA_CHARS[i * 5 + 3], ROMA_CHARS[i * 5 + 4] });
+//            List<string> question = new List<string>(new[] { HIRA_CHARS[i * 5], HIRA_CHARS[i * 5 + 1], HIRA_CHARS[i * 5 + 2], HIRA_CHARS[i * 5 + 3], HIRA_CHARS[i * 5 + 4] });
+//        }
+        
 //        // HRAGANA ZONE
 //        //level 0
 //        int index = 0;
-//        string name = "Round " + index + "/" + Constants.TOTAL_ROUND;
 //        string welcomeMessage = "OMG! Negative point! Trying more!";
-//        List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
-//        List<string> questions = new List<string>(new[] { "あ", "い", "う", "え", "お" });
 //        int downPoint = -1000000;
 //        int upPoint = 0;
 //        int hintPoint = 0;
