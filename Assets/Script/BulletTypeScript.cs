@@ -8,17 +8,20 @@ public class BulletTypeScript : MonoBehaviour
 {
 
     public GameObject BulletTypePrefabs;
-    public List<string> answer = new List<string>(new[] { "a", "i", "u", "e", "o" });
+    public List<string> answers = new List<string>();
 
     // Use this for initialization
-    void Start () {
-	    for (int i = 0; i < answer.Count; i++)
+    void Start ()
+    {
+        answers = LevelUtils.currentLevel.GetAnswers();
+	    for (int i = 0; i < answers.Count; i++)
 	    {
 	        GameObject BulletType = Instantiate(BulletTypePrefabs, Vector3.zero, Quaternion.identity) as GameObject;
             BulletType.transform.SetParent(transform);
             BulletType.transform.localScale = new Vector3(1, 1);
-	        BulletType.name = answer[i];
-	        BulletType.GetComponentInChildren<Text>().text = answer[i];
+	        BulletType.name = answers[i];
+            Debug.Log(answers[i]);
+	        BulletType.GetComponentInChildren<Text>().text = answers[i];
 	    }
 	    GameObject[] BulletTypeButtons = GameObject.FindGameObjectsWithTag("BulletType");
 	    for (int i = 0; i < BulletTypeButtons.Length; i++)

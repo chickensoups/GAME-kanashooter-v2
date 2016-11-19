@@ -2,9 +2,10 @@
 using System.Diagnostics;
 using System.Linq;
 
-public class LevelData_New 
+public class LevelUtils 
 {
 	private static List<Level> levels; //hold all levels data
+    public static Level currentLevel;
 
 	public static void initLevel()
 	{
