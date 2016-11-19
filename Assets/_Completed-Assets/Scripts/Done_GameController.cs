@@ -1,40 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Done_GameController : MonoBehaviour
 {
-	public GameObject[] hazards;
+    public GameObject[] hazards;
 	public Vector3 spawnValues;
 	public int hazardCount;
-	public float spawnWait;
 	public float startWait;
-	public float waveWait;
 	
 	public GUIText gameOverText;
-	
-	private bool gameOver;
-	private bool restart;
-	private int score;
-	
-	void Start ()
-	{
-		gameOver = false;
-		restart = false;
+
+    private int index;
+    private string name;
+    private string welcomeMessage;
+    public List<string> questions;
+    public List<string> answers;
+    private int enemyEachWaveCount;
+    private float waveWait;
+    private float spawnWait;
+    private bool isRotate;
+    private bool isFaster;
+
+    public static int levelNumber;
+
+    private static Done_GameController _instance;
+
+    public static Done_GameController instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
+    void Start ()
+    {
+        Level levelData = LevelUtils.currentLevel;
+        index = levelData.GetIndex();
+        name = levelData.GetName();
+        welcomeMessage = levelData.GetWelcomeMessage();
+        answers = levelData.GetAnswers();
+        questions = levelData.GetQuestions();
+        enemyEachWaveCount = levelData.GetEnemyEachWaveCount();
+        waveWait = levelData.GetWaveWait();
+        spawnWait = levelData.GetSpawnWait();
+        isRotate = levelData.IsRotate();
+        isFaster = levelData.IsFaster();
 		gameOverText.text = "";
-		score = 0;
-		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
-	}
-	
-	void Update ()
+    }
+
+    void Update ()
 	{
-		if (restart)
-		{
-			if (Input.GetKeyDown (KeyCode.R))
-			{
-				Application.LoadLevel (Application.loadedLevel);
-			}
-		}
 	}
 	
 	IEnumerator SpawnWaves ()
@@ -42,37 +64,25 @@ public class Done_GameController : MonoBehaviour
 		yield return new WaitForSeconds (startWait);
 		while (true)
 		{
+            Debug.Log("dsdfsdf");
 			for (int i = 0; i < hazardCount; i++)
 			{
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
+				GameObject enemy = Instantiate (hazard, spawnPosition, spawnRotation) as GameObject;
+			    int randomIndex = Random.Range(0, questions.Count);
+                enemy.GetComponentInChildren<TextMesh>().text = questions[randomIndex];
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
 			
-			if (gameOver)
-			{
-				restart = true;
-				break;
-			}
 		}
 	}
 	
-	public void AddScore (int newScoreValue)
-	{
-		score += newScoreValue;
-		UpdateScore ();
-	}
-	
-	void UpdateScore ()
-	{
-	}
 	
 	public void GameOver ()
 	{
 		gameOverText.text = "Game Over!";
-		gameOver = true;
 	}
 }

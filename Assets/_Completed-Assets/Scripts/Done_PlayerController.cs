@@ -19,8 +19,6 @@ public class Done_PlayerController : MonoBehaviour
 	public Transform shotSpawn;
 	public float fireRate;
 	 
-	private float nextFire;
-
     private static Done_PlayerController _instance;
     
     public static Done_PlayerController instance
@@ -49,8 +47,20 @@ public class Done_PlayerController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+	    if (currentTarget == null )
+	    {
+            return;
+        }
+
 	    float enemyPositionX = currentTarget.transform.position.x;
-	    if (transform.position.x < enemyPositionX)
+	    if (Mathf.Abs(transform.position.x - enemyPositionX) < 0.5)
+	    {
+	        transform.position = new Vector3(enemyPositionX, transform.position.y, transform.position.z);
+            transform.rotation = Quaternion.identity;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            return;
+        }
+        if (transform.position.x < enemyPositionX)
 	    {
 	        GetComponent<Rigidbody>().velocity = new Vector3(speed, 0.0f, 0.0f);
 	    }

@@ -1,6 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectController : MonoBehaviour
 {
@@ -8,11 +12,13 @@ public class LevelSelectController : MonoBehaviour
     public GameObject levelUnlockedPrefab;
     public GameObject levelLockedPrefab;
     private GameObject highestUnlockedLevel;
+
     // Use this for initialization
     void Start()
     {
+        LevelUtils.initLevel();
         int currentUnlockedLevel = 10;
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 20; i++)
         {
             GameObject levelPrefab;
             levels[i] = new Level();
@@ -27,32 +33,32 @@ public class LevelSelectController : MonoBehaviour
             {
                 levelPrefab = Instantiate(levelUnlockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
                 levelPrefab.GetComponentInChildren<Text>().text = i + 1+"";
+           
             }
             else
             {
                 levelPrefab = Instantiate(levelLockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-                
             }
             if (i == currentUnlockedLevel - 1)
             {
                 highestUnlockedLevel = levelPrefab;
             }
             levelPrefab.transform.parent = transform;
+            levelPrefab.transform.localScale = new Vector3(1, 1);
             Button btn = levelPrefab.GetComponent<Button>();
             btn.onClick.AddListener(OnButtonClick);
-        }
 
-      //  Vector3 positionScroll = highestUnlockedLevel.transform.position;
-     //   GetComponent<RectTransform>().position = new Vector3(transform.position.x,270, transform.position.z) ;
- 
+            
+        }
 
     }
     void OnButtonClick()
     {
-        Debug.Log("It works");
-        //To do ...
+        int levelNumber = Int32.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text);
+        LevelUtils.currentLevel = LevelUtils.GetLevel(levelNumber);
+        SceneManager.LoadScene("Play");
     }
-   
+  
 }
 
 
