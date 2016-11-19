@@ -12,7 +12,7 @@ public class LevelSelectController : MonoBehaviour
     void Start()
     {
         int currentUnlockedLevel = 10;
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 20; i++)
         {
             GameObject levelPrefab;
             levels[i] = new Level();
@@ -38,6 +38,7 @@ public class LevelSelectController : MonoBehaviour
                 highestUnlockedLevel = levelPrefab;
             }
             levelPrefab.transform.parent = transform;
+            levelPrefab.transform.localScale = new Vector3(1, 1);
             Button btn = levelPrefab.GetComponent<Button>();
             btn.onClick.AddListener(OnButtonClick);
         }
