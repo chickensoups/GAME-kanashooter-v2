@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour {
         level = LevelSelectController.currentViewInfoLevel;
         btnClose = GetComponentInChildren<Button>();
         btnClose.onClick.AddListener(OnCloseButton);
-        GetComponentInChildren<Text>().text = level.GetWelcomeMessage();
+        GetComponentsInChildren<Text>()[1].text = level.GetWelcomeMessage();
         Debug.Log(GetComponentInChildren<Text>().text);
        
         
