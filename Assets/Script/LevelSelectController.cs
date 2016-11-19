@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -32,11 +33,11 @@ public class LevelSelectController : MonoBehaviour
             {
                 levelPrefab = Instantiate(levelUnlockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
                 levelPrefab.GetComponentInChildren<Text>().text = i + 1+"";
+           
             }
             else
             {
                 levelPrefab = Instantiate(levelLockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-                
             }
             if (i == currentUnlockedLevel - 1)
             {
@@ -46,11 +47,9 @@ public class LevelSelectController : MonoBehaviour
             levelPrefab.transform.localScale = new Vector3(1, 1);
             Button btn = levelPrefab.GetComponent<Button>();
             btn.onClick.AddListener(OnButtonClick);
-        }
 
-      //  Vector3 positionScroll = highestUnlockedLevel.transform.position;
-     //   GetComponent<RectTransform>().position = new Vector3(transform.position.x,270, transform.position.z) ;
- 
+            
+        }
 
     }
     void OnButtonClick()
@@ -60,7 +59,7 @@ public class LevelSelectController : MonoBehaviour
         SceneManager.LoadScene("Play");
         PlayerDataUtils.saveData();
     }
-   
+  
 }
 
 
