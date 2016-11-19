@@ -13,7 +13,7 @@ public class Done_GameController : MonoBehaviour
 	
 	public GUIText gameOverText;
 
-    private int index;
+    public int index;
     private string name;
     private string welcomeMessage;
     public List<string> questions;
@@ -40,7 +40,7 @@ public class Done_GameController : MonoBehaviour
 
     void Start ()
     {
-        Level levelData = LevelUtils.currentLevel;
+        Level levelData = LevelUtils.GetLevel(PlayerDataUtils.loadData().currentLevelIndex);
         index = levelData.GetIndex();
         name = levelData.GetName();
         welcomeMessage = levelData.GetWelcomeMessage();
@@ -85,4 +85,9 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOverText.text = "Game Over!";
 	}
+
+    public void OnApplicationQuit()
+    {
+        PlayerDataUtils.saveData();
+    }
 }
