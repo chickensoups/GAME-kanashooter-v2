@@ -6,8 +6,11 @@ public class LevelUtils
 {
 	private static List<Level> levels; //hold all levels data
     public static Level currentLevel;
-
-	public static void initLevel()
+    public static List<Level> GetLevels()
+    {
+        return levels;
+    }
+	public static void initLevel()  
 	{
 		//Common Datas
 		int index;

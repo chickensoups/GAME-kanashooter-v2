@@ -12,7 +12,8 @@ public class LevelSelectController : MonoBehaviour
     public GameObject levelUnlockedPrefab;
     public GameObject levelLockedPrefab;
     private GameObject highestUnlockedLevel;
-
+    public GameObject infoPanel;
+    public static Level currentViewInfoLevel;
     // Use this for initialization
     void Start()
     {
@@ -33,7 +34,8 @@ public class LevelSelectController : MonoBehaviour
             {
                 levelPrefab = Instantiate(levelUnlockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
                 levelPrefab.GetComponentInChildren<Text>().text = i + 1+"";
-           
+                Button btnInfo = levelPrefab.GetComponentsInChildren<Button>()[1];
+                btnInfo.onClick.AddListener(OnButtonInfoClick);
             }
             else
             {
@@ -58,7 +60,16 @@ public class LevelSelectController : MonoBehaviour
         LevelUtils.currentLevel = LevelUtils.GetLevel(levelNumber);
         SceneManager.LoadScene("Play");
     }
-  
+    void OnButtonInfoClick()
+    {
+        infoPanel.SetActive(true);
+        GameObject goParent = EventSystem.current.currentSelectedGameObject.transform.parent.gameObject;
+        int levelNumber = Int32.Parse(goParent.GetComponentInChildren<Text>().text);
+      
+        currentViewInfoLevel= LevelUtils.GetLevel(levelNumber);
+        
+
+    }
 }
 
 
