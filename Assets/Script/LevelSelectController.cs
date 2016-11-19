@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectController : MonoBehaviour
 {
@@ -8,9 +11,11 @@ public class LevelSelectController : MonoBehaviour
     public GameObject levelUnlockedPrefab;
     public GameObject levelLockedPrefab;
     private GameObject highestUnlockedLevel;
+
     // Use this for initialization
     void Start()
     {
+        LevelUtils.initLevel();
         int currentUnlockedLevel = 10;
         for (int i = 0; i < 20; i++)
         {
@@ -50,8 +55,9 @@ public class LevelSelectController : MonoBehaviour
     }
     void OnButtonClick()
     {
-        Debug.Log("It works");
-        //To do ...
+        int levelNumber = Int32.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text);
+        LevelUtils.currentLevel = LevelUtils.GetLevel(levelNumber);
+        SceneManager.LoadScene("Play");
     }
    
 }

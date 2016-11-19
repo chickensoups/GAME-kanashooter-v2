@@ -19,8 +19,6 @@ public class Done_PlayerController : MonoBehaviour
 	public Transform shotSpawn;
 	public float fireRate;
 	 
-	private float nextFire;
-
     private static Done_PlayerController _instance;
     
     public static Done_PlayerController instance
