@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Done_Boundary 
@@ -27,7 +28,8 @@ public class Done_PlayerController : MonoBehaviour
         get { return _instance; }
     }
 
-    public GameObject currentTarget, currentBulletType;
+    public GameObject currentTarget;
+    public static string currentBulletType;
 
     void Awake()
     {
@@ -36,11 +38,12 @@ public class Done_PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (currentTarget != null && currentBulletType != null && Time.time > nextFire) 
+		if (currentTarget != null && currentBulletType != null) 
 		{
-            nextFire = Time.time + fireRate;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			GameObject ShotClone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
+		    ShotClone.GetComponentInChildren<TextMesh>().text = currentBulletType;
 			GetComponent<AudioSource>().Play ();
+		    currentBulletType = null;
 		}
 	}
 
