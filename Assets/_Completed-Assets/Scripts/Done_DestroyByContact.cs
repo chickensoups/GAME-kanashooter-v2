@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Done_DestroyByContact : MonoBehaviour
 {
@@ -28,17 +29,34 @@ public class Done_DestroyByContact : MonoBehaviour
 			return;
 		}
 
-		if (explosion != null)
-		{
-			Instantiate(explosion, transform.position, transform.rotation);
-		}
-
 		if (other.tag == "Barrier")
 		{
-			Instantiate(playerExplosion, transform.position, transform.rotation);
-		}
-		
-		gameController.AddScore(scoreValue);
-		Destroy (gameObject);
+		    if (explosion != null)
+		    {
+		        Instantiate(explosion, transform.position, transform.rotation);
+		    }
+            Destroy(gameObject);
+        }
+
+	    if (other.tag == "Bolt")
+	    {
+            Destroy(other.gameObject);
+	        Instantiate(explosion, transform.position, transform.rotation);
+	        if (other.GetComponentInChildren<TextMesh>().text == Done_GameController.instance.answers[Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
+	        {
+	            Instantiate(explosion, transform.position, transform.rotation);
+                Destroy(gameObject);
+                Destroy(other.gameObject);
+            }
+	    }
+        
 	}
+
+    void OnDestroy()
+    {
+        if (gameObject == Done_PlayerController.instance.currentTarget)
+        {
+            Done_PlayerController.instance.currentTarget = null;
+        }
+    }
 }

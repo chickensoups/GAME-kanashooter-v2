@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Done_GameController : MonoBehaviour
 {
@@ -11,18 +12,32 @@ public class Done_GameController : MonoBehaviour
 	public float waveWait;
 	
 	public GUIText gameOverText;
-	
-	private bool gameOver;
+
+    public List<string> questions = new List<string>(new[] {"あ", "い", "う", "え", "お" });
+    public List<string> answers = new List<string>(new[] { "a", "i", "u", "e", "o" });
+
+    private bool gameOver;
 	private bool restart;
 	private int score;
-	
-	void Start ()
+
+    private static Done_GameController _instance;
+
+    public static Done_GameController instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
+    void Start ()
 	{
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
 		score = 0;
-		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
 	
@@ -47,7 +62,9 @@ public class Done_GameController : MonoBehaviour
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
 				Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
-				Instantiate (hazard, spawnPosition, spawnRotation);
+				GameObject enemy = Instantiate (hazard, spawnPosition, spawnRotation) as GameObject;
+			    int randomIndex = Random.Range(0, questions.Count);
+                enemy.GetComponentInChildren<TextMesh>().text = questions[randomIndex];
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
@@ -60,15 +77,6 @@ public class Done_GameController : MonoBehaviour
 		}
 	}
 	
-	public void AddScore (int newScoreValue)
-	{
-		score += newScoreValue;
-		UpdateScore ();
-	}
-	
-	void UpdateScore ()
-	{
-	}
 	
 	public void GameOver ()
 	{

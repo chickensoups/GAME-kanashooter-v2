@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Script;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -16,7 +15,7 @@ public class BulletTypeScript : MonoBehaviour
 	    for (int i = 0; i < answer.Count; i++)
 	    {
 	        GameObject BulletType = Instantiate(BulletTypePrefabs, Vector3.zero, Quaternion.identity) as GameObject;
-            BulletType.transform.parent = transform;
+            BulletType.transform.SetParent(transform);
             BulletType.transform.localScale = new Vector3(1, 1);
 	        BulletType.name = answer[i];
 	        BulletType.GetComponentInChildren<Text>().text = answer[i];
