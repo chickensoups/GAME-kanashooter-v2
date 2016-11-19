@@ -6,37 +6,30 @@ using System.Text;
 
 public class Level
 {
-    public int index;
+	private int index;
     private string name;
     private string welcomeMessage;
     private List<string> questions;
     private List<string> answers;
-    private int downPoint;
-    private int upPoint;
-    private int hintPoint;
     private int enemyEachWaveCount;
     private float waveWait;
     private float spawnWait;
     private bool isRotate;
     private bool isFaster;
-    public bool isUnlocked;
+	private bool isUnlocked;
 
     public Level()
     {
 
     }
 
-    public Level(int index, string name, string welcomeMessage, List<string> questions, List<string> answers, int downPoint, int upPoint, int hintPoint,
-        int enemyEachWaveCount, float waveWait, float spawnWait, bool isRotate, bool isFaster)
+    public Level(int index, string name, string welcomeMessage, List<string> questions, List<string> answers,int enemyEachWaveCount, float waveWait, float spawnWait, bool isRotate, bool isFaster)
     {
         this.index = index;
         this.name = name;
         this.welcomeMessage = welcomeMessage;
         this.questions = questions;
         this.answers = answers;
-        this.downPoint = downPoint;
-        this.upPoint = upPoint;
-        this.hintPoint = hintPoint;
         this.enemyEachWaveCount = enemyEachWaveCount;
         this.waveWait = waveWait;
         this.spawnWait = spawnWait;
@@ -74,21 +67,6 @@ public class Level
         return enemyEachWaveCount;
     }
 
-    public int GetDownPoint()
-    {
-        return downPoint;
-    }
-
-    public int GetUpPoint()
-    {
-        return upPoint;
-    }
-
-    public int GetHintPoint()
-    {
-        return hintPoint;
-    }
-
     public bool IsRotate()
     {
         return isRotate;
@@ -108,5 +86,17 @@ public class Level
     {
         return welcomeMessage;
     }
+
+	public bool IsUnlocked(){
+		return isUnlocked;
+	}
+
+	public void SetIndex(int index){
+		this.index = index;
+	}
+
+	public void SetIsUnlocked(bool state){
+		isUnlocked = state;
+	}
 }
 

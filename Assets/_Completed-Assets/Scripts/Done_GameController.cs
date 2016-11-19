@@ -10,8 +10,6 @@ public class Done_GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 	
-	public GUIText scoreText;
-	public GUIText restartText;
 	public GUIText gameOverText;
 	
 	private bool gameOver;
@@ -22,7 +20,6 @@ public class Done_GameController : MonoBehaviour
 	{
 		gameOver = false;
 		restart = false;
-		restartText.text = "";
 		gameOverText.text = "";
 		score = 0;
 		UpdateScore ();
@@ -57,7 +54,6 @@ public class Done_GameController : MonoBehaviour
 			
 			if (gameOver)
 			{
-				restartText.text = "Press 'R' for Restart";
 				restart = true;
 				break;
 			}
@@ -72,7 +68,6 @@ public class Done_GameController : MonoBehaviour
 	
 	void UpdateScore ()
 	{
-		scoreText.text = "Score: " + score;
 	}
 	
 	public void GameOver ()
