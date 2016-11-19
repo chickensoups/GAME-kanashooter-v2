@@ -16,14 +16,14 @@ public class LevelSelectController : MonoBehaviour
         {
             GameObject levelPrefab;
             levels[i] = new Level();
-            levels[i].index = i;
+			levels[i].SetIndex(i) ;
             if (i < currentUnlockedLevel)
             {
-                levels[i].isUnlocked = true;
+				levels[i].SetIsUnlocked(true);
             }
 
 
-            if (levels[i].isUnlocked)
+			if (levels[i].IsUnlocked())
             {
                 levelPrefab = Instantiate(levelUnlockedPrefab, Vector3.zero, Quaternion.identity) as GameObject;
                 levelPrefab.GetComponentInChildren<Text>().text = i + 1+"";
