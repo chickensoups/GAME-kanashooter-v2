@@ -11,6 +11,7 @@ public class HealthbarController : MonoBehaviour {
 
 	private void UpdateHealthBar(){
 		float ratio = currentHealth / fullHealth;
+	    GetComponentInChildren<Text>().text = currentHealth.ToString();
 		currentHealthBar.rectTransform.localScale = new Vector3 (ratio,1,1);
 	}
 
@@ -20,7 +21,10 @@ public class HealthbarController : MonoBehaviour {
 	}
 
 	public void regenHealth(){
-		increaseHealth (1);
+	    if (currentHealth < 100)
+	    {
+            increaseHealth(1);
+        }
 	}
 
 	public void decreaseHealth(float decreasePoint){

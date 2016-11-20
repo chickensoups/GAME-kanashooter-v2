@@ -6,7 +6,8 @@ public class Done_DestroyByContact : MonoBehaviour
 {
 	public GameObject explosion;
 	public GameObject playerExplosion;
-	public int scoreValue;
+    public GameObject scoreAnimationText;
+    public int scoreValue;
 	private Done_GameController gameController;
 
 	void Start ()
@@ -35,6 +36,11 @@ public class Done_DestroyByContact : MonoBehaviour
 		    {
 		        Instantiate(explosion, transform.position, transform.rotation);
 		    }
+            Done_GameController.instance.healthbar.GetComponent<HealthbarController>().decreaseHealth(5);
+            Vector3 positionScore = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            GameObject scoreTextAnimation = (GameObject) Instantiate(scoreAnimationText, positionScore, Quaternion.identity);
+            scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.red;
+            scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "-" + 5;
             Destroy(gameObject);
         }
 
@@ -47,7 +53,18 @@ public class Done_DestroyByContact : MonoBehaviour
 	                Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
-                Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(1);
+                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, transform.position, Quaternion.identity);
+                scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
+	            if (gameObject.name == "EnemyShip(Clone)")
+	            {
+                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 2;
+                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(2);
+                }
+	            else
+	            {
+                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 1;
+                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(1);
+                }
 	            Destroy(gameObject);
 	            Destroy(other.gameObject);
 	        }

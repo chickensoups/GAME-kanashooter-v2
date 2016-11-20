@@ -28,7 +28,7 @@ public class Done_GameController : MonoBehaviour
 
     private static Done_GameController _instance;
 
-    public GameObject progressbar;
+    public GameObject progressbar, healthbar;
 
 
     public static Done_GameController instance
@@ -43,7 +43,6 @@ public class Done_GameController : MonoBehaviour
 
     void Start ()
     {
-        LevelUtils.initLevel();//Todo: remove in production
         Level levelData = LevelUtils.currentLevel;
         index = levelData.GetIndex();
         name = levelData.GetName();
@@ -58,11 +57,23 @@ public class Done_GameController : MonoBehaviour
 		gameOverText.text = "";
 
         StartCoroutine (SpawnWaves ());
+        StartCoroutine(RegenHealthbar());
     }
 
     void Update ()
 	{
 
+    }
+
+    IEnumerator RegenHealthbar()
+    {
+        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            healthbar.GetComponent<HealthbarController>().regenHealth();
+            yield return new WaitForSeconds(1);
+
+        }
     }
 	
 	IEnumerator SpawnWaves ()
