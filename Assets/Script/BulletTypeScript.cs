@@ -20,7 +20,6 @@ public class BulletTypeScript : MonoBehaviour
             BulletType.transform.SetParent(transform);
             BulletType.transform.localScale = new Vector3(1, 1);
 	        BulletType.name = answers[i];
-            Debug.Log(answers[i]);
 	        BulletType.GetComponentInChildren<Text>().text = answers[i];
 	    }
 	    GameObject[] BulletTypeButtons = GameObject.FindGameObjectsWithTag("BulletType");
