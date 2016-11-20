@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using UnityEditorInternal;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 

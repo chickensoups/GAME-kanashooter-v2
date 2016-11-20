@@ -62,7 +62,10 @@ public class Done_GameController : MonoBehaviour
 
     void Update ()
 	{
-
+	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
+	    {
+	        gameOverText.text = "Game Over!!!";
+	    }
     }
 
     IEnumerator RegenHealthbar()
