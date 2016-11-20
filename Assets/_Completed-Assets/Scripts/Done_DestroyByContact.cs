@@ -42,11 +42,18 @@ public class Done_DestroyByContact : MonoBehaviour
 	    {
             Destroy(other.gameObject);
 	        Instantiate(explosion, transform.position, transform.rotation);
-	        if (other.GetComponentInChildren<TextMesh>().text == Done_GameController.instance.answers[Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
+	        if (other.GetComponentInChildren<TextMesh>().text ==
+	            Done_GameController.instance.answers[
+	                Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
-                Destroy(gameObject);
-                Destroy(other.gameObject);
+                Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(1);
+	            Destroy(gameObject);
+	            Destroy(other.gameObject);
+	        }
+	        else
+	        {
+                Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
             }
 	    }
         

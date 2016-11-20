@@ -28,6 +28,9 @@ public class Done_GameController : MonoBehaviour
 
     private static Done_GameController _instance;
 
+    public GameObject progressbar;
+
+
     public static Done_GameController instance
     {
         get { return _instance; }
@@ -40,7 +43,8 @@ public class Done_GameController : MonoBehaviour
 
     void Start ()
     {
-        Level levelData = LevelUtils.GetLevel(PlayerDataUtils.loadData().currentLevelIndex);
+        LevelUtils.initLevel();//Todo: remove in production
+        Level levelData = LevelUtils.currentLevel;
         index = levelData.GetIndex();
         name = levelData.GetName();
         welcomeMessage = levelData.GetWelcomeMessage();
@@ -52,19 +56,20 @@ public class Done_GameController : MonoBehaviour
         isRotate = levelData.IsRotate();
         isFaster = levelData.IsFaster();
 		gameOverText.text = "";
-		StartCoroutine (SpawnWaves ());
+
+        StartCoroutine (SpawnWaves ());
     }
 
     void Update ()
 	{
-	}
+
+    }
 	
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
 		while (true)
 		{
-            Debug.Log("dsdfsdf");
 			for (int i = 0; i < hazardCount; i++)
 			{
 				GameObject hazard = hazards [Random.Range (0, hazards.Length)];
@@ -88,6 +93,6 @@ public class Done_GameController : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        PlayerDataUtils.saveData();
+        //PlayerDataUtils.saveData();
     }
 }

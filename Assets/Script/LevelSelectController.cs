@@ -57,7 +57,8 @@ public class LevelSelectController : MonoBehaviour
         int levelNumber = Int32.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text);
         LevelUtils.currentLevel = LevelUtils.GetLevel(levelNumber);
         SceneManager.LoadScene("Play");
-        PlayerDataUtils.saveData();
+        //PlayerDataUtils.playerData.currentLevelIndex = levelNumber;
+        //PlayerDataUtils.saveData();
     }
   
 }
