@@ -49,13 +49,14 @@ public class Done_DestroyByContact : MonoBehaviour
 	    if (other.tag == "Bolt" && gameObject.tag != "EnemyBolt")
 	    {
             Destroy(other.gameObject);
-	        Instantiate(explosion, transform.position, transform.rotation);
-	        if (other.GetComponentInChildren<TextMesh>().text ==
+	        Instantiate(explosion, transform.position, transform.rotation);         
+
+            if (other.GetComponentInChildren<TextMesh>().text ==
 	            Done_GameController.instance.answers[
 	                Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
-
+                Instantiate(smallStar, transform.position, new Quaternion());
                 GameObject progressAnimation = (GameObject) Instantiate(progressAnimationText, transform.position, Quaternion.identity);
 	            progressAnimation.GetComponentInChildren<TextMesh>().text = scoreValue.ToString();
 	            progressAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
