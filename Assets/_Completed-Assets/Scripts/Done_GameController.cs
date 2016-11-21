@@ -66,6 +66,11 @@ public class Done_GameController : MonoBehaviour
 	    {
 	        gameOverText.text = "Game Over!!!";
 	    }
+	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
+	    {
+	        gameOverText.text = "Level up!!!";
+	        PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex();
+	    }
     }
 
     IEnumerator RegenHealthbar()
@@ -75,6 +80,10 @@ public class Done_GameController : MonoBehaviour
         {
             healthbar.GetComponent<HealthbarController>().regenHealth();
             yield return new WaitForSeconds(1);
+            if (gameOverText.text.Equals("Game Over!!!") || gameOverText.text.Equals("Level up!!!"))
+            {
+                break;
+            }
 
         }
     }
@@ -95,6 +104,11 @@ public class Done_GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
+
+		    if (gameOverText.text.Equals("Game Over!!!") || gameOverText.text.Equals("Level up!!!"))
+		    {
+		        break;
+		    }
 			
 		}
 	}
@@ -107,6 +121,14 @@ public class Done_GameController : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        //PlayerDataUtils.saveData();
+        PlayerDataUtils.saveData();
+    }
+
+    public void OnApplicationFocus(bool focusStatus)
+    {
+        if (!focusStatus)
+        {
+            PlayerDataUtils.saveData();
+        }
     }
 }

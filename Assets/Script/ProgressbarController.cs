@@ -37,8 +37,11 @@ public class ProgressbarController : MonoBehaviour {
 
     public void resetProgress()
     {
-        currentpoint = 0;
-        UpdateProgressBar();
+        while (currentpoint != 0)
+        {
+            currentpoint--;
+            UpdateProgressBar();
+        }
     }
 
 	public float GetCurrentPoint(){

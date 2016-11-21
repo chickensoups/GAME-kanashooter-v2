@@ -14,12 +14,18 @@ public class LevelSelectController : MonoBehaviour
     private GameObject highestUnlockedLevel;
     public GameObject infoPanel;
     public static Level currentViewInfoLevel;
-    private int currentUnlockedLevel = 5;
+    private int currentUnlockedLevel = 1;
     private GameObject levelPrefab;
     // Use this for initialization
     void Start()
     {
         LevelUtils.initLevel();
+        PlayerDataUtils.loadData();
+        if (PlayerDataUtils.playerData.highestLevelUnlocked != 0)
+        {
+            currentUnlockedLevel = PlayerDataUtils.playerData.highestLevelUnlocked;
+        }
+        
 
         for (int i = 0; i < LevelUtils.GetLevels().Count; i++)
         {
@@ -66,9 +72,9 @@ public class LevelSelectController : MonoBehaviour
         
         int levelNumber = Int32.Parse(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().text);
         LevelUtils.currentLevel = LevelUtils.GetLevel(levelNumber);
+        PlayerDataUtils.playerData.currentLevelIndex = levelNumber;
+        PlayerDataUtils.saveData();
         SceneManager.LoadScene("Play");
-        //PlayerDataUtils.playerData.currentLevelIndex = levelNumber;
-        //PlayerDataUtils.saveData();
     }
     void OnButtonInfoClick()
     {
