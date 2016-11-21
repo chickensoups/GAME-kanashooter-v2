@@ -341,6 +341,7 @@ public class LevelUtils
 
     public static Level GetLevel(int index)
     {
+        index--;
         if (index <= 0)
         {
             return levels.First();

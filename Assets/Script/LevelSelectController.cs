@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class LevelSelectController : MonoBehaviour
 {
@@ -60,7 +59,7 @@ public class LevelSelectController : MonoBehaviour
         {
             highestUnlockedLevel = levelPrefab;
         }
-        levelPrefab.transform.parent = transform;
+        levelPrefab.transform.SetParent(transform);
         levelPrefab.transform.localScale = new Vector3(1, 1);
         if (i == LevelUtils.GetLevels().Count - 1 || i == LevelUtils.GetLevels().Count - 2)
         {
