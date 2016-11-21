@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Done_DestroyByContact : MonoBehaviour
 {
 	public GameObject explosion;
+    public GameObject smallStar;
 	public GameObject playerExplosion;
     public GameObject scoreAnimationText;
     public int scoreValue;
@@ -54,8 +55,9 @@ public class Done_DestroyByContact : MonoBehaviour
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
                 GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, transform.position, Quaternion.identity);
-                scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
-	            if (gameObject.name == "EnemyShip(Clone)")
+                scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.yellow;
+                Instantiate(smallStar, transform.position,new Quaternion());
+                if (gameObject.name == "EnemyShip(Clone)")
 	            {
                     scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 2;
                     Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(2);
