@@ -7,6 +7,7 @@ public class Done_DestroyByContact : MonoBehaviour
 	public GameObject explosion;
 	public GameObject playerExplosion;
     public GameObject scoreAnimationText;
+    public GameObject progressAnimationText;
     public int scoreValue;
 	private Done_GameController gameController;
 
@@ -25,7 +26,7 @@ public class Done_DestroyByContact : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.tag == "Boundary" || other.tag == "Enemy")
+		if (other.tag == "Boundary" || other.tag == "Enemy" || other.tag == "EnemyBolt")
 		{
 			return;
 		}
@@ -44,7 +45,7 @@ public class Done_DestroyByContact : MonoBehaviour
             Destroy(gameObject);
         }
 
-	    if (other.tag == "Bolt")
+	    if (other.tag == "Bolt" && gameObject.tag != "EnemyBolt")
 	    {
             Destroy(other.gameObject);
 	        Instantiate(explosion, transform.position, transform.rotation);
@@ -53,18 +54,10 @@ public class Done_DestroyByContact : MonoBehaviour
 	                Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
-                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, transform.position, Quaternion.identity);
-                scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
-	            if (gameObject.name == "EnemyShip(Clone)")
-	            {
-                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 2;
-                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(2);
-                }
-	            else
-	            {
-                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 1;
-                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(1);
-                }
+                GameObject progressAnimation = (GameObject) Instantiate(progressAnimationText, transform.position, Quaternion.identity);
+	            progressAnimation.GetComponentInChildren<TextMesh>().text = scoreValue.ToString();
+	            progressAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
+                Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(scoreValue);
 	            Destroy(gameObject);
 	            Destroy(other.gameObject);
 	        }

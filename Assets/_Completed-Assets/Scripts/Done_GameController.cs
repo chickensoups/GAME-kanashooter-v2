@@ -65,7 +65,15 @@ public class Done_GameController : MonoBehaviour
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
 	        gameOverText.text = "Game Over!!!";
+            StopCoroutine(SpawnWaves());
+            StopCoroutine(RegenHealthbar());
 	    }
+	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
+	    {
+	        gameOverText.text = "Level up!!!";
+            StopCoroutine(SpawnWaves());
+            StopCoroutine(RegenHealthbar());
+        }
     }
 
     IEnumerator RegenHealthbar()
@@ -107,6 +115,14 @@ public class Done_GameController : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        //PlayerDataUtils.saveData();
+        PlayerDataUtils.saveData();
+    }
+
+    public void OnApplicationFocus(bool focusStatus)
+    {
+        if (!focusStatus)
+        {
+            PlayerDataUtils.saveData();
+        }
     }
 }

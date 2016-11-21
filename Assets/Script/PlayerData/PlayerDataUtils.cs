@@ -6,7 +6,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class PlayerDataUtils
 {
 
-    public static PlayerData playerData;
+    public static PlayerData playerData = new PlayerData();
+
+    public static void saveFirst()
+    {
+        
+    }
     public static void saveData()
     {
         BinaryFormatter bf = new BinaryFormatter();
