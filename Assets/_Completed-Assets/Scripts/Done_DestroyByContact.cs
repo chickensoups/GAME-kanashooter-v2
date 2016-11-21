@@ -55,26 +55,11 @@ public class Done_DestroyByContact : MonoBehaviour
 	                Done_GameController.instance.questions.IndexOf(gameObject.GetComponentInChildren<TextMesh>().text)])
 	        {
 	            Instantiate(explosion, transform.position, transform.rotation);
-<<<<<<< HEAD
-                GameObject scoreTextAnimation = (GameObject)Instantiate(scoreAnimationText, transform.position, Quaternion.identity);
-                scoreTextAnimation.GetComponentInChildren<TextMesh>().color = Color.yellow;
-                Instantiate(smallStar, transform.position,new Quaternion());
-                if (gameObject.name == "EnemyShip(Clone)")
-	            {
-                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 2;
-                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(2);
-                }
-	            else
-	            {
-                    scoreTextAnimation.GetComponentInChildren<TextMesh>().text = "+" + 1;
-                    Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(1);
-                }
-=======
+
                 GameObject progressAnimation = (GameObject) Instantiate(progressAnimationText, transform.position, Quaternion.identity);
 	            progressAnimation.GetComponentInChildren<TextMesh>().text = scoreValue.ToString();
 	            progressAnimation.GetComponentInChildren<TextMesh>().color = Color.green;
                 Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().increaseProgress(scoreValue);
->>>>>>> 39c1efcd343cef7455bf52c1f98d8c07c4e9732c
 	            Destroy(gameObject);
 	            Destroy(other.gameObject);
 	        }
