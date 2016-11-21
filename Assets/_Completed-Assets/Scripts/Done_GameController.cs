@@ -65,15 +65,12 @@ public class Done_GameController : MonoBehaviour
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
 	        gameOverText.text = "Game Over!!!";
-            StopCoroutine(SpawnWaves());
-            StopCoroutine(RegenHealthbar());
 	    }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
 	        gameOverText.text = "Level up!!!";
-            StopCoroutine(SpawnWaves());
-            StopCoroutine(RegenHealthbar());
-        }
+	        PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex();
+	    }
     }
 
     IEnumerator RegenHealthbar()
@@ -83,6 +80,10 @@ public class Done_GameController : MonoBehaviour
         {
             healthbar.GetComponent<HealthbarController>().regenHealth();
             yield return new WaitForSeconds(1);
+            if (gameOverText.text.Equals("Game Over!!!") || gameOverText.text.Equals("Level up!!!"))
+            {
+                break;
+            }
 
         }
     }
@@ -103,6 +104,11 @@ public class Done_GameController : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 			}
 			yield return new WaitForSeconds (waveWait);
+
+		    if (gameOverText.text.Equals("Game Over!!!") || gameOverText.text.Equals("Level up!!!"))
+		    {
+		        break;
+		    }
 			
 		}
 	}
