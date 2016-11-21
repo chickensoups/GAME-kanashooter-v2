@@ -18,11 +18,25 @@ public class ProgressbarController : MonoBehaviour {
 		currentProgressBar.rectTransform.localScale = new Vector3 (ratio,1,1);
 		if (currentpoint >= winPoint1) {
 			Stars [0].GetComponent<Image>().color = new Color(1,1,1,255);
-		}if (currentpoint >= winPoint2) {
+		}
+		else
+		{
+		    Stars [0].GetComponent<Image>().color = new Color(1,1,1,0.5f);
+		}
+        if (currentpoint >= winPoint2) {
 			Stars [1].GetComponent<Image>().color = new Color(1,1,1,255);;
-		}if (currentpoint >= winPoint3) {
+		}
+        else
+        {
+            Stars[1].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        }
+        if (currentpoint >= winPoint3) {
 			Stars [2].GetComponent<Image>().color = new Color(1,1,1,255);;
 		}
+        else
+        {
+            Stars[2].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        }
 	}
 
     public void increaseProgress(float increasePoint){
