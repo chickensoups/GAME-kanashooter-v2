@@ -65,6 +65,10 @@ public class Done_GameController : MonoBehaviour
 
     void Update ()
 	{
+	    if (isStop)
+	    {
+	        return;
+	    }
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
             GameoverPanel.SetActive(true);

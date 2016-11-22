@@ -36,11 +36,9 @@ public class GameoverDialog : MonoBehaviour {
 
     void OnRedoButtonClick()
     {
-        Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
-        Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         gameObject.SetActive(false);
-        Done_GameController.instance.Start();
+        SceneManager.LoadScene("Play");
     }
 
 

@@ -37,24 +37,18 @@ public class LevelUpDialog : MonoBehaviour {
 
     void OnRedoButtonClick()
     {
-        Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
-        Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         gameObject.SetActive(false);
-        Done_GameController.instance.Start();
+        SceneManager.LoadScene("Play");
     }
 
     void OnNextButtonClick()
     {
-        Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
-        Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         PlayerDataUtils.playerData.currentLevelIndex = PlayerDataUtils.playerData.currentLevelIndex + 1;
-        PlayerDataUtils.saveData();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
-        Done_GameController.instance.levelData = LevelUtils.currentLevel;
-        BulletTypeScript.instance.answers = LevelUtils.currentLevel.GetAnswers();
+        PlayerDataUtils.saveData();
+        SceneManager.LoadScene("Play");
         gameObject.SetActive(false);
-        Done_GameController.instance.Start();
     }
 
     public void OnCloseButtonClick()
