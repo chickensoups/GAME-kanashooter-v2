@@ -41,6 +41,7 @@ public class LevelUpDialog : MonoBehaviour {
         Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         gameObject.SetActive(false);
+        Done_GameController.instance.Start();
     }
 
     void OnNextButtonClick()
@@ -53,6 +54,7 @@ public class LevelUpDialog : MonoBehaviour {
         Done_GameController.instance.levelData = LevelUtils.currentLevel;
         BulletTypeScript.instance.answers = LevelUtils.currentLevel.GetAnswers();
         gameObject.SetActive(false);
+        Done_GameController.instance.Start();
     }
 
     public void OnCloseButtonClick()

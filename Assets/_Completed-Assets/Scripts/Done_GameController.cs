@@ -45,7 +45,7 @@ public class Done_GameController : MonoBehaviour
         _instance = this;
     }
 
-    void Start ()
+    public void Start ()
     {
         levelData = LevelUtils.currentLevel;
         index = levelData.GetIndex();
@@ -79,6 +79,7 @@ public class Done_GameController : MonoBehaviour
 	        {
 	            Destroy(enemies[i]);
 	        }
+            StopAllCoroutines();
             isStop = true;
 	    }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
@@ -89,7 +90,17 @@ public class Done_GameController : MonoBehaviour
 	            PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex() + 1;
 
 	        }
-	        PlayerDataUtils.saveData();
+            GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < 10; i++)
+            {
+                Vector3 pos = new Vector3(transform.position.x + Random.Range(-100, 100), transform.position.y, transform.position.z + Random.Range(-100, 100));
+                Instantiate(explosion, pos, Quaternion.identity);
+            }
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                Destroy(enemy[i]);
+            }
+            PlayerDataUtils.saveData();
             LevelUpPanel.SetActive(true);
             LevelUpPanel.GetComponent<LevelUpDialog>().ShowData();
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -97,10 +108,11 @@ public class Done_GameController : MonoBehaviour
             {
                 Destroy(enemies[i]);
             }
+            StopAllCoroutines();
         }
     }
 
-    IEnumerator RegenHealthbar()
+    public IEnumerator RegenHealthbar()
     {
         yield return new WaitForSeconds(1);
         while (true)
@@ -115,7 +127,7 @@ public class Done_GameController : MonoBehaviour
         }
     }
 	
-	IEnumerator SpawnWaves ()
+	public IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
 		while (true)
