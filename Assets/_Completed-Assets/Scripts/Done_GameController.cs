@@ -69,8 +69,6 @@ public class Done_GameController : MonoBehaviour
 	    }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
-            LevelUpPanel.SetActive(true);
-            LevelUpPanel.GetComponent<LevelUpDialog>().ShowData();
             isStop = true;
 	        if (PlayerDataUtils.playerData.highestLevelUnlocked == LevelUtils.currentLevel.GetIndex())
 	        {
@@ -78,8 +76,9 @@ public class Done_GameController : MonoBehaviour
 
 	        }
 	        PlayerDataUtils.saveData();
-
-	    }
+            LevelUpPanel.SetActive(true);
+            LevelUpPanel.GetComponent<LevelUpDialog>().ShowData();
+        }
     }
 
     IEnumerator RegenHealthbar()
