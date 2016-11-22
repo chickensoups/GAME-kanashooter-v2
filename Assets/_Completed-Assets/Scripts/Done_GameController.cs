@@ -64,14 +64,20 @@ public class Done_GameController : MonoBehaviour
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
             GameoverPanel.SetActive(true);
+            GameoverPanel.GetComponent<GameoverDialog>().ShowData();
             isStop = true;
 	    }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
             LevelUpPanel.SetActive(true);
+            LevelUpPanel.GetComponent<LevelUpDialog>().ShowData();
             isStop = true;
-	        PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex() + 1;
-            PlayerDataUtils.saveData();
+	        if (PlayerDataUtils.playerData.highestLevelUnlocked == LevelUtils.currentLevel.GetIndex())
+	        {
+	            PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex() + 1;
+
+	        }
+	        PlayerDataUtils.saveData();
 
 	    }
     }

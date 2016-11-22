@@ -4,11 +4,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class PlaySceneDialog : MonoBehaviour {
+public class GameoverDialog : MonoBehaviour {
 
     private Text welcomeMessage;
     private Level level;
-    public GameObject NextLevel, RedoLevel, close;
+    public Button RedoLevel, close;
     // Use this for initialization
     private static DialogManager _instance;
 
@@ -21,11 +21,9 @@ public class PlaySceneDialog : MonoBehaviour {
     public void ShowData()
     {
         Button RedoButton = RedoLevel.GetComponent<Button>();
-        Button NextButton = NextLevel.GetComponent<Button>();
         Button CloseButton = close.GetComponent<Button>();
 
         RedoButton.onClick.AddListener(OnRedoButtonClick);
-        NextButton.onClick.AddListener(OnNextButtonClick);
         CloseButton.onClick.AddListener(OnCloseButtonClick);
     }
 
@@ -46,14 +44,6 @@ public class PlaySceneDialog : MonoBehaviour {
         SceneManager.LoadScene("Play");
     }
 
-    void OnNextButtonClick()
-    {
-        Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
-        Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
-        LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex + 1);
-        gameObject.SetActive(false);
-        SceneManager.LoadScene("Play");
-    }
 
     public void OnCloseButtonClick()
     {
