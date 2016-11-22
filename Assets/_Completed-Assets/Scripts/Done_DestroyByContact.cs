@@ -11,8 +11,19 @@ public class Done_DestroyByContact : MonoBehaviour
     public GameObject progressAnimationText;
     public int scoreValue;
 	private Done_GameController gameController;
+    private static Done_DestroyByContact _instance;
 
-	void Start ()
+    public static Done_DestroyByContact instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
+    void Start ()
 	{
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("GameController");
 		if (gameControllerObject != null)

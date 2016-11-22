@@ -10,6 +10,18 @@ public class BulletTypeScript : MonoBehaviour
     public GameObject BulletTypePrefabs;
     public List<string> answers = new List<string>();
 
+    private static BulletTypeScript _instance;
+
+    public static BulletTypeScript instance
+    {
+        get { return _instance; }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
     // Use this for initialization
     void Start ()
     {

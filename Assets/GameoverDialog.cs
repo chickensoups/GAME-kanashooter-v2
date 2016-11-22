@@ -40,8 +40,6 @@ public class GameoverDialog : MonoBehaviour {
         Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         gameObject.SetActive(false);
-        Debug.Log("ABC");
-        SceneManager.LoadScene("Play");
     }
 
 
