@@ -45,5 +45,6 @@ public class GameoverDialog : MonoBehaviour {
     public void OnCloseButtonClick()
     {
         gameObject.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
     }
 }

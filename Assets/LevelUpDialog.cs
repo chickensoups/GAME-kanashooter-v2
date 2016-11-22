@@ -54,5 +54,6 @@ public class LevelUpDialog : MonoBehaviour {
     public void OnCloseButtonClick()
     {
         gameObject.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
     }
 }

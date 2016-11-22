@@ -22,7 +22,7 @@ public class Done_GameController : MonoBehaviour
     private float spawnWait;
     private bool isRotate;
     private bool isFaster;
-    private bool isStop = false;
+    public bool isStop = false;
 
     public GameObject explosion;
 
