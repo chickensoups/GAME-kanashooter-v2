@@ -49,9 +49,9 @@ public class LevelUpDialog : MonoBehaviour {
     {
         Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
         Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
-        LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex + 1);
-        PlayerDataUtils.playerData.currentLevelIndex = LevelUtils.currentLevel.GetIndex();
+        PlayerDataUtils.playerData.currentLevelIndex = PlayerDataUtils.playerData.currentLevelIndex + 1;
         PlayerDataUtils.saveData();
+        LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         gameObject.SetActive(false);
         SceneManager.LoadScene("Play");
     }
