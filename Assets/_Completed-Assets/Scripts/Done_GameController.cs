@@ -70,7 +70,7 @@ public class Done_GameController : MonoBehaviour
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
             isStop = true;
-	        if (PlayerDataUtils.playerData.highestLevelUnlocked == LevelUtils.currentLevel.GetIndex())
+	        if (PlayerDataUtils.playerData.highestLevelUnlocked <= LevelUtils.currentLevel.GetIndex())
 	        {
 	            PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex() + 1;
 
