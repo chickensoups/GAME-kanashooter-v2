@@ -36,7 +36,12 @@ public class HealthbarController : MonoBehaviour {
 		return currentHealth;
 	}
 
-	public float GetFullHealth(){
+    public void SetCurrentHealth(float currentHealth)
+    {
+        this.currentHealth = currentHealth;
+    }
+
+    public float GetFullHealth(){
 		return fullHealth;
 	}
 

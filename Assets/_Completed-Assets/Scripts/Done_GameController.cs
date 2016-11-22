@@ -10,9 +10,8 @@ public class Done_GameController : MonoBehaviour
 	public Vector3 spawnValues;
 	public int hazardCount;
 	public float startWait;
+    public GameObject LevelUpPanel, GameoverPanel;
 	
-	public GUIText gameOverText;
-
     public int index;
     private string name;
     private string welcomeMessage;
@@ -55,7 +54,6 @@ public class Done_GameController : MonoBehaviour
         spawnWait = levelData.GetSpawnWait();
         isRotate = levelData.IsRotate();
         isFaster = levelData.IsFaster();
-		gameOverText.text = "";
 
         StartCoroutine (SpawnWaves ());
         StartCoroutine(RegenHealthbar());
@@ -65,14 +63,16 @@ public class Done_GameController : MonoBehaviour
 	{
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
-	        gameOverText.text = "Game Over!!!";
-	        isStop = true;
+            GameoverPanel.SetActive(true);
+            isStop = true;
 	    }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
-	        gameOverText.text = "Level up!!!";
-	        isStop = true;
-	        PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex();
+            LevelUpPanel.SetActive(true);
+            isStop = true;
+	        PlayerDataUtils.playerData.highestLevelUnlocked = LevelUtils.currentLevel.GetIndex() + 1;
+            PlayerDataUtils.saveData();
+
 	    }
     }
 
@@ -112,15 +112,9 @@ public class Done_GameController : MonoBehaviour
 		    {
 		        break;
 		    }
-			
 		}
 	}
 	
-	
-	public void GameOver ()
-	{
-		gameOverText.text = "Game Over!";
-	}
 
     public void OnApplicationQuit()
     {

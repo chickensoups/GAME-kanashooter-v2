@@ -23,7 +23,7 @@ public class LevelSelectController : MonoBehaviour
         if (PlayerDataUtils.playerData.highestLevelUnlocked != 0)
         {
             currentUnlockedLevel = PlayerDataUtils.playerData.highestLevelUnlocked;
-        }
+        } 
         
 
         for (int i = 0; i < LevelUtils.GetLevels().Count; i++)
