@@ -23,7 +23,6 @@ public class LevelUpDialog : MonoBehaviour {
         Button RedoButton = RedoLevel.GetComponent<Button>();
         Button NextButton = NextLevel.GetComponent<Button>();
         Button CloseButton = close.GetComponent<Button>();
-        Debug.Log("ABC");
         RedoButton.onClick.AddListener(OnRedoButtonClick);
         NextButton.onClick.AddListener(OnNextButtonClick);
         CloseButton.onClick.AddListener(OnCloseButtonClick);
@@ -51,6 +50,8 @@ public class LevelUpDialog : MonoBehaviour {
         Done_GameController.instance.healthbar.GetComponent<HealthbarController>().SetCurrentHealth(100);
         Done_GameController.instance.progressbar.GetComponent<ProgressbarController>().resetProgress();
         LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex + 1);
+        PlayerDataUtils.playerData.currentLevelIndex = LevelUtils.currentLevel.GetIndex();
+        PlayerDataUtils.saveData();
         gameObject.SetActive(false);
         SceneManager.LoadScene("Play");
     }
