@@ -24,8 +24,6 @@ public class Done_GameController : MonoBehaviour
     private bool isFaster;
     public bool isStop = false;
 
-    public GameObject explosion;
-
     public static int levelNumber;
 
     private static Done_GameController _instance;
@@ -67,25 +65,21 @@ public class Done_GameController : MonoBehaviour
 	{
 	    if (isStop)
 	    {
-	        return;
+            return;
 	    }
 	    if (healthbar.GetComponent<HealthbarController>().GetCurrentHealth() <= 0)
 	    {
             GameoverPanel.SetActive(true);
             GameoverPanel.GetComponent<GameoverDialog>().ShowData();
-	        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-	        for (int i = 0; i < 10; i++)
-	        {
-                Vector3 pos = new Vector3(transform.position.x + Random.Range(-100, 100), transform.position.y, transform.position.z + Random.Range(-100, 100));
-                Instantiate(explosion, pos, Quaternion.identity);
-	        }
-	        for (int i = 0; i < enemies.Length; i++)
-	        {
-	            Destroy(enemies[i]);
-	        }
-            StopAllCoroutines();
             isStop = true;
-	    }
+            StopCoroutine(SpawnWaves());
+            StopCoroutine(RegenHealthbar());
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                Destroy(enemies[i]);
+            }
+        }
 	    if (progressbar.GetComponent<ProgressbarController>().GetCurrentPoint() >= progressbar.GetComponent<ProgressbarController>().GetWinPoint3())
 	    {
             isStop = true;
@@ -95,11 +89,6 @@ public class Done_GameController : MonoBehaviour
 
 	        }
             GameObject[] enemy = GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i = 0; i < 10; i++)
-            {
-                Vector3 pos = new Vector3(transform.position.x + Random.Range(-100, 100), transform.position.y, transform.position.z + Random.Range(-100, 100));
-                Instantiate(explosion, pos, Quaternion.identity);
-            }
             for (int i = 0; i < enemy.Length; i++)
             {
                 Destroy(enemy[i]);
@@ -107,12 +96,13 @@ public class Done_GameController : MonoBehaviour
             PlayerDataUtils.saveData();
             LevelUpPanel.SetActive(true);
             LevelUpPanel.GetComponent<LevelUpDialog>().ShowData();
+            StopCoroutine(SpawnWaves());
+            StopCoroutine(RegenHealthbar());
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemies.Length; i++)
             {
                 Destroy(enemies[i]);
             }
-            StopAllCoroutines();
         }
     }
 

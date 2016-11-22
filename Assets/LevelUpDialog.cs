@@ -9,6 +9,8 @@ public class LevelUpDialog : MonoBehaviour {
     private Text welcomeMessage;
     private Level level;
     public Button NextLevel, RedoLevel, close;
+
+    public GameObject explosion;
     // Use this for initialization
     private static DialogManager _instance;
 
@@ -20,19 +22,36 @@ public class LevelUpDialog : MonoBehaviour {
 
     public void ShowData()
     {
+        for (int i = 0; i < 300; i++)
+        {
+            Vector3 pos = new Vector3(Done_GameController.instance.transform.position.x + Random.Range(-100, 100), Done_GameController.instance.transform.position.y, Done_GameController.instance.transform.position.z + Random.Range(-100, 100));
+            Instantiate(explosion, pos, Quaternion.identity);
+        }
         Button RedoButton = RedoLevel.GetComponent<Button>();
         Button NextButton = NextLevel.GetComponent<Button>();
         Button CloseButton = close.GetComponent<Button>();
         RedoButton.onClick.AddListener(OnRedoButtonClick);
         NextButton.onClick.AddListener(OnNextButtonClick);
         CloseButton.onClick.AddListener(OnCloseButtonClick);
+        StartCoroutine(explosionAnimate());
     }
 
 
     // Update is called once per frame
-    void Update()
+    IEnumerator explosionAnimate()
     {
+        yield return new WaitForSeconds(0.01f);
+        while (true)
+        {
+            Vector3 pos = new Vector3(Done_GameController.instance.transform.position.x + Random.Range(-20, 20), Done_GameController.instance.transform.position.y, Done_GameController.instance.transform.position.z + Random.Range(-20, 20));
+            Instantiate(explosion, pos, Quaternion.identity);
+            yield return new WaitForSeconds(0.01f);
+            if (!gameObject.activeSelf)
+            {
+                break;
+            }
 
+        }
     }
 
     void OnRedoButtonClick()
