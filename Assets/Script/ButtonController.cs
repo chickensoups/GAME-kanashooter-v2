@@ -24,7 +24,10 @@ public class ButtonController: MonoBehaviour
 
     public void Play()
     {
+        PlayerDataUtils.loadData();
+        LevelUtils.currentLevel = LevelUtils.GetLevel(PlayerDataUtils.playerData.currentLevelIndex);
         SceneManager.LoadScene("Play");
+        Done_GameController.instance.Start();
     }
 
     public void SelectLevel()

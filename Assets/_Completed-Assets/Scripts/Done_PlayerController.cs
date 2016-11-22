@@ -36,7 +36,7 @@ public class Done_PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (currentTarget != null && currentBulletType != null) 
+		if (currentBulletType != null) 
 		{
 			GameObject ShotClone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation) as GameObject;
 		    ShotClone.GetComponentInChildren<TextMesh>().text = currentBulletType;

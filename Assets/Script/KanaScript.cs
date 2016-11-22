@@ -46,7 +46,7 @@ public class KanaScript : MonoBehaviour
             if (ROMA_CHARS[i] != ".")
             {
                 GameObject kana = Instantiate(prefabs, Vector3.zero, Quaternion.identity) as GameObject;
-                kana.transform.parent = transform;
+                kana.transform.SetParent(transform);
                 kana.transform.localScale = new Vector3(1, 1);
                 kana.name = ROMA_CHARS[i];
                 kana.GetComponentsInChildren<Text>()[0].text = HIRA_CHARS[i];
@@ -55,7 +55,7 @@ public class KanaScript : MonoBehaviour
             else
             {
                 GameObject kana = Instantiate(prefabs, Vector3.zero, Quaternion.identity) as GameObject;
-                kana.transform.parent = transform;
+                kana.transform.SetParent(transform);
                 kana.transform.localScale = new Vector3(1, 1);
                 kana.GetComponentInChildren<Image>().enabled = false;
                 kana.GetComponentsInChildren<Text>()[0].text = "";

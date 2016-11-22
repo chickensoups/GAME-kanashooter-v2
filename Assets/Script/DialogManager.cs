@@ -7,8 +7,7 @@ public class DialogManager : MonoBehaviour {
     private Button btnClose;
     private Text welcomeMessage;
     private Level level;
-    public GameObject answerPrefab;
-    public GameObject questionPrefab;
+    public GameObject answerPrefab, questionPrefab;
     public Transform questionsTransform;
     public Transform answersTransform;
     // Use this for initialization
@@ -49,8 +48,6 @@ public class DialogManager : MonoBehaviour {
             answerTemp.transform.SetParent(answersTransform);
             answerTemp.transform.localScale = new Vector3(1, 1);
             answerTemp.GetComponentInChildren<Text>().text = level.GetAnswers()[i];
-            Debug.Log(level.GetAnswers()[i]);
-
 
             AudioSource audioSource = answerTemp.AddComponent<AudioSource>();
             audioSource.clip = Resources.Load("sound/pronunciation/"+level.GetAnswers()[i]) as AudioClip;
